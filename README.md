@@ -1,2 +1,2 @@
 # DDoS
-The course project of System Security Techniques
+Course Project of System Security Techniques
