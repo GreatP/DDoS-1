@@ -61,7 +61,7 @@ def main():
     nm = nmap.PortScanner()
 
     counter = 0
-    ip = raw_input('Target IP: ')  # The IP we are attacking
+    ip = raw_input("Enter the target to attack: ")
     print "Begin Port Scan..."
     nm.scan(ip, '1-443')
     # nm.scaninfo()

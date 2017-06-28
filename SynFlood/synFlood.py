@@ -32,7 +32,7 @@ except socket.error, msg:
 # tell kernel not to put in headers
 s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 
-dest_ip = raw_input('Target IP: ') # The IP we want to attack
+dest_ip = raw_input("Enter the target to attack: ")
 print "Begin Port Scan..."
 nm = nmap.PortScanner()
 nm.scan(dest_ip, '1-1024')

